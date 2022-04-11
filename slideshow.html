@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Show</title>
+    <style>
+        .photo {
+            margin: auto;
+            width: 50%;
+            height: 330px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius: 10px;
+
+        }
+
+        .startstop {
+            margin: auto;
+            width: 21.5%;
+            height: 80px;
+            margin-top: 15px;
+        }
+
+        button {
+            width: 140px;
+            height: 60px;
+            font-weight: bold;
+            font-size: 15px;
+            color: white;
+            border-radius: 7px;
+            cursor: pointer;
+
+        }
+
+        img {
+            margin: auto;
+            width: 100%;
+            height: 330px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="photo" id="images"></div>
+
+    <div class="startstop">
+        <button onclick="start()" style="background-color: rgb(17, 122, 17);">Start Slide Show</button>
+
+        <button onclick="stop()" style="background-color: rgb(240, 8, 8);">Stop Slide Show</button>
+    </div>
+
+</body>
+
+</html>
+<script>
+    let images_div = document.getElementById("images");
+    let i = 0;
+    let id;
+    function start() {
+        let images_arr = JSON.parse(localStorage.getItem("images"));
+        let img = document.createElement("img");
+        id = setInterval(function () {
+            if (i === images_arr.length) {
+                i = 0;
+            }
+            images_div.innerHTML = null;
+            img.src = images_arr[i]
+            i++;
+            images_div.append(img);
+        }, 1000)
+
+    }
+    function stop() {
+        clearInterval(id)
+    }
+
+</script>
